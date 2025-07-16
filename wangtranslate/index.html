@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王國興地政士事務所官網</title>
+    <style>
+        /* 字體統一微軟正黑體 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft JhengHei', Arial, sans-serif !important;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* 導航欄 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        /* 主要內容區塊 */
+        .section {
+            padding: 80px 2rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* 介紹區塊 */
+        #introduction {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .intro-text {
+            text-align: left;
+        }
+
+        .intro-text h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .intro-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* 輪播圖樣式 */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: white;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(0,0,0,0.7);
+        }
+
+        .carousel-prev {
+            left: 20px;
+        }
+
+        .carousel-next {
+            right: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+
+        /* 主要工作內容區塊 */
+        #services {
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            color: #666;
+        }
+
+        /* 獎項區塊 */
+        #awards {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .award-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .award-icon {
+            font-size: 3rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        /* 業務範圍區塊 */
+        #business {
+            background: #e8f4f8;
+        }
+
+        .business-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .business-list {
+            list-style: none;
+        }
+
+        .business-list li {
+            background: white;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #1e3c72;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .business-image {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .business-image-item {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .business-image-item:hover {
+            transform: scale(1.05);
+        }
+
+        .business-image-item img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        /* 圖片放大模態框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        .close:hover {
+            color: #bbb;
+        }
+
+        /* 社群媒體浮窗 */
+        .social-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .social-button {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .social-button:hover {
+            transform: scale(1.1);
+        }
+
+        .social-button:hover .social-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-10px);
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .fb-icon {
+            background: #1877F2;
+        }
+
+        .line-icon {
+            background: #00C300;
+        }
+
+        .social-tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            width: 200px;
+            text-align: center;
+        }
+
+        .social-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 20px;
+            border: 10px solid transparent;
+            border-top-color: white;
+        }
+
+        .social-tooltip h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+        }
+
+        .social-tooltip img {
+            width: 150px;
+            height: 150px;
+            border-radius: 5px;
+            box-shadow: none;
+        }
+
+        .line-tooltip h4 {
+            color: #00C300;
+        }
+
+        .fb-tooltip h4 {
+            color: #1877F2;
+        }
+
+        .tooltip-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+        }
+
+        .fb-tooltip-icon {
+            background: #1877F2;
+        }
+
+        /* 人員及地點區塊 */
+        #contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            pointer-events: none;
+        }
+
+        #contact .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            color: #ffd700;
+            font-size: 1.4rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .contact-info p {
+            margin-bottom: 0.8rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-info p:hover {
+            background: rgba(255,255,255,0.1);
+            padding-left: 10px;
+            border-radius: 5px;
+        }
+
+        .contact-info strong {
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .map-container {
+            background: rgba(255,255,255,0.95);
+            padding: 1.5rem;
+            border-radius: 15px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .map-container iframe {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .intro-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .intro-text h1 {
+                font-size: 2rem;
+            }
+
+            .carousel-container {
+                height: 300px;
+            }
+
+            .business-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 60px 1rem;
+            }
+        }
+
+        /* 滾動動畫 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">王國興地政士事務所</div>
+            <ul class="nav-links">
+                <li><a href="#introduction">介紹</a></li>
+                <li><a href="#services">主要工作內容</a></li>
+                <li><a href="#awards">獎項殊榮</a></li>
+                <li><a href="#business">業務範圍</a></li>
+                <li><a href="#contact">聯絡資訊</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 介紹區塊 -->
+    <section id="introduction" class="section">
+        <div class="container">
+            <div class="intro-content fade-in">
+                <!-- 輪播圖 -->
+                <div class="carousel-container">
+                    <div class="carousel-slide active">
+                        <img src="image/01.webp" alt="王國興地政士事務所 - 專業服務">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="image/02.webp" alt="地政服務 - 土地登記">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="image/03.webp" alt="地政服務 - 土地測量">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="image/04.webp" alt="地政服務 - 不動產估價">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="image/05.webp" alt="地政服務 - 法律諮詢">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="image/06.webp" alt="地政服務 - 產權調查">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="image/07.webp" alt="地政服務 - 代書服務">
+                    </div>
+                    
+                    <!-- 導航按鈕 -->
+                    <button class="carousel-nav carousel-prev" onclick="changeSlide(-1)">‹</button>
+                    <button class="carousel-nav carousel-next" onclick="changeSlide(1)">›</button>
+                    
+                    <!-- 指示點 -->
+                    <div class="carousel-dots">
+                        <span class="carousel-dot active" onclick="currentSlide(1)"></span>
+                        <span class="carousel-dot" onclick="currentSlide(2)"></span>
+                        <span class="carousel-dot" onclick="currentSlide(3)"></span>
+                        <span class="carousel-dot" onclick="currentSlide(4)"></span>
+                        <span class="carousel-dot" onclick="currentSlide(5)"></span>
+                        <span class="carousel-dot" onclick="currentSlide(6)"></span>
+                        <span class="carousel-dot" onclick="currentSlide(7)"></span>
+                    </div>
+                </div>
+                
+                <!-- 介紹文字 -->
+                <div class="intro-text">
+                    <h1>王國興地政士事務所</h1>
+                    <p>專業、誠信、效率 - 您最信賴的地政服務夥伴</p>
+                    <p>我們擁有豐富的地政實務經驗，致力於為客戶提供最優質的土地登記、測量、估價等專業服務。以專業知識為基礎，以客戶需求為導向，為您的地政事務提供最完善的解決方案。</p>
+                    <a href="#contact" class="cta-button">立即諮詢</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要工作內容區塊 -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">主要工作內容</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <h3>土地登記</h3>
+                    <p>辦理各類土地及建物所有權移轉登記、抵押權設定登記、地上權登記等相關業務，確保您的產權安全。</p>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>土地測量</h3>
+                    <p>提供精確的土地測量服務，包括地籍測量、建物測量、界址鑑定等，為您的土地權益提供保障。</p>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>不動產估價</h3>
+                    <p>專業的不動產估價服務，為買賣、徵收、課稅等提供公正客觀的價值評估。</p>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>法律諮詢</h3>
+                    <p>提供地政相關法律諮詢服務，協助您了解相關法規，維護自身權益。</p>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>產權調查</h3>
+                    <p>詳細的產權調查服務，協助您了解土地及建物的權利狀況，避免交易風險。</p>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>代書服務</h3>
+                    <p>專業的代書服務，協助您辦理各類地政相關文件，讓您省時省力又安心。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 獎項及殊榮區塊 -->
+    <section id="awards" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">獲得獎項及殊榮</h2>
+            <div class="awards-grid">
+                <div class="award-card fade-in">
+                    <div class="award-icon">🏆</div>
+                    <h3>2024年 全台特優地政士獎</h3>
+                    <p>榮獲全國最高榮譽「全台特優地政士」獎，肯定我們在地政服務領域的卓越表現。</p>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">📜</div>
+                    <h3>2023年 新竹區優等地政士獎</h3>
+                    <p>榮獲永慶不動產「新竹區優等地政士」獎，持續獲得業界肯定。</p>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">🤝</div>
+                    <h3>2018年 新竹市優良地政士獎</h3>
+                    <p>榮獲「新竹市優良地政士」獎，在地服務品質獲得官方認證。</p>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">🏅</div>
+                    <h3>2016年 樂群敬業獎</h3>
+                    <p>榮獲全國地政士聯合會「樂群敬業」獎，肯定團隊合作精神。</p>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">🎖️</div>
+                    <h3>2016年 高才碩望獎</h3>
+                    <p>榮獲新竹市地政士公會「高才碩望」獎，專業能力獲得同業認可。</p>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">💎</div>
+                    <h3>2015年 全國優良地政士獎</h3>
+                    <p>榮獲永慶集團「全國優良地政士」獎，全國性服務品質獲得肯定。</p>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">🔒</div>
+                    <h3>2014年 新竹區安全保障獎</h3>
+                    <p>榮獲太平洋房屋「新竹區安全保障」獎，為客戶權益提供最安全的保障。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 業務範圍及服務內容區塊 -->
+    <section id="business" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">業務範圍及服務內容</h2>
+            <div class="business-content">
+                <div class="business-list fade-in">
+                    <h3>核心業務</h3>
+                    <ul>
+                        <li>土地及建物所有權移轉登記</li>
+                        <li>抵押權設定、變更、塗銷登記</li>
+                        <li>地上權、地役權設定登記</li>
+                        <li>建物第一次測量及登記</li>
+                        <li>土地分割、合併登記</li>
+                        <li>繼承、贈與、買賣等移轉登記</li>
+                        <li>不動產估價及鑑價</li>
+                        <li>地籍圖謄本申請</li>
+                        <li>土地界址鑑定</li>
+                        <li>地政相關法律諮詢</li>
+                    </ul>
+                </div>
+                <div class="business-image fade-in">
+                    <div class="business-image-item" onclick="openModal('image/wang01.webp')">
+                        <img src="image/wang01.webp" alt="業務圖片1">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang02.webp')">
+                        <img src="image/wang02.webp" alt="業務圖片2">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang03.webp')">
+                        <img src="image/wang03.webp" alt="業務圖片3">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang04.webp')">
+                        <img src="image/wang04.webp" alt="業務圖片4">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang05.webp')">
+                        <img src="image/wang05.webp" alt="業務圖片5">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang06.webp')">
+                        <img src="image/wang06.webp" alt="業務圖片6">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang07.webp')">
+                        <img src="image/wang07.webp" alt="業務圖片7">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang08.webp')">
+                        <img src="image/wang08.webp" alt="業務圖片8">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang09.webp')">
+                        <img src="image/wang09.webp" alt="業務圖片9">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang10.webp')">
+                        <img src="image/wang10.webp" alt="業務圖片10">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang11.webp')">
+                        <img src="image/wang11.webp" alt="業務圖片11">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang12.webp')">
+                        <img src="image/wang12.webp" alt="業務圖片12">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang13.webp')">
+                        <img src="image/wang13.webp" alt="業務圖片13">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang14.webp')">
+                        <img src="image/wang14.webp" alt="業務圖片14">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang15.webp')">
+                        <img src="image/wang15.webp" alt="業務圖片15">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang16.webp')">
+                        <img src="image/wang16.webp" alt="業務圖片16">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang17.webp')">
+                        <img src="image/wang17.webp" alt="業務圖片17">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang18.webp')">
+                        <img src="image/wang18.webp" alt="業務圖片18">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang19.webp')">
+                        <img src="image/wang19.webp" alt="業務圖片19">
+                    </div>
+                    <div class="business-image-item" onclick="openModal('image/wang20.webp')">
+                        <img src="image/wang20.webp" alt="業務圖片20">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 專訪影片區塊 -->
+    <section id="interview" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">專訪影片</h2>
+            <div class="business-content">
+                <div class="fade-in" style="text-align:left;">
+                    <h3>【青年購屋貸款】青年首購。青年首購條件？首購利率？社會住宅，以租代買！海外購屋原因？日本買房要現金買賣。日本0元買房？台灣以房養老政策 feat. 王國興地政士事務所</h3>
+                    <p><strong>-重點摘要：</strong></p>
+                    <ul>
+                        <li>▲青年首購條件？</li>
+                        <li>▲社會住宅，以租代買</li>
+                        <li>▲海外購屋原因？</li>
+                        <li>▲日本買房要現金買賣</li>
+                        <li>▲日本0元買房</li>
+                        <li>▲日本舊房有整修費用</li>
+                        <li>▲越南有投資市場</li>
+                        <li>▲台灣以房養老政策</li>
+                        <li>▲未來人的退休計劃住養老村？</li>
+                        <li>▲日本的下流老人</li>
+                    </ul>
+                    <p>本期大來賓：王國興<br>
+                    王國興地政士事務所<br>
+                    地址：新竹市自由路27巷39號<br>
+                    （三民網球場旁邊、監理所對面）<br>
+                    客服專線：0919-319413<br>
+                    所長：王國興地政士<br>
+                    新竹市政府頒發「107年新竹市優良地政士」</p>
+                </div>
+                <div class="fade-in" style="display:flex;justify-content:center;align-items:center;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/BNans0bK8LM?si=rMQVMiVr_cq2VvTN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 員及地點區塊 -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">代書事務所人員及地點</h2>
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h3>聯絡資訊</h3>
+                    <p><strong>事務所名稱：</strong>王國興地政士事務所</p>
+                    <p><strong>負責人：</strong>王國興 地政士</p>
+                    <p><strong>地址：</strong> 新竹市自由路27巷39號</p>
+                    <p><strong>電話：</strong>0919319413</p>
+                    <p><strong>營業時間：</strong>週一至週日 09:00-21:00</p>
+                    <h3>代書團隊成員</h3>
+                    <p><strong>王國興代書：</strong>0919319413(所長)</p>
+                    <p><strong>李思賢代書：</strong>0911067610</p>
+                    <p><strong>李嘉惠代書：</strong>0987190905</p>
+                    <p><strong>黃百興代書：</strong>0933267267</p>
+                    <p><strong>王威程代書：</strong>0919319413</p>
+                </div>
+                <div >
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.548850444332!2d120.97818967569988!3d24.81089737796164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346835b83853f2e5%3A0x1325e378638e0756!2z546L5ZyL6IiI5Luj5pu45Zyw5pS_5aOr5LqL5YuZ5omA!5e0!3m2!1szh-TW!2sus!4v1752334065484!5m2!1szh-TW!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 圖片放大模態框 -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- 社群媒體浮窗 -->
+    <div class="social-float">
+        <!-- Facebook浮窗 -->
+        <div class="social-button" onclick="openFacebook()">
+            <div class="social-icon fb-icon">F</div>
+            <div class="social-tooltip fb-tooltip">
+                <h4>點擊前往Facebook</h4>
+                <div class="tooltip-icon fb-tooltip-icon">F</div>
+            </div>
+        </div>
+        
+        <!-- LINE浮窗 -->
+        <div class="social-button" onclick="openLine()">
+            <div class="social-icon line-icon">L</div>
+            <div class="social-tooltip line-tooltip">
+                <h4>掃描QR Code加入LINE</h4>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://line.me/ti/p/cECJQFTD_Y" alt="LINE QR Code">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 輪播圖功能
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            // 隱藏所有幻燈片
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // 顯示當前幻燈片
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex = (currentSlideIndex + direction + totalSlides) % totalSlides;
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index - 1;
+            showSlide(currentSlideIndex);
+        }
+
+        // 自動輪播
+        function autoSlide() {
+            changeSlide(1);
+        }
+
+        // 每5秒自動切換
+        setInterval(autoSlide, 5000);
+
+        // 圖片放大功能
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = imageSrc;
+            document.body.style.overflow = 'hidden'; // 防止背景滾動
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // 恢復背景滾動
+        }
+
+        // 點擊模態框背景關閉
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // ESC鍵關閉模態框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Facebook功能
+        function openFacebook() {
+            const fbUrl = 'https://www.facebook.com/share/19VyjCzQQn/?mibextid=wwXIfr';
+            window.open(fbUrl, '_blank');
+        }
+
+        // LINE功能
+        function openLine() {
+            const lineUrl = 'https://line.me/ti/p/cECJQFTD_Y';
+            window.open(lineUrl, '_blank');
+        }
+
+        // 滾動動畫效果
+        function checkFadeIn() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // 平滑滾動
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 監聽滾動事件
+        window.addEventListener('scroll', checkFadeIn);
+        
+        // 頁面載入時檢查
+        window.addEventListener('load', checkFadeIn);
+    </script>
+</body>
+</html> 
